@@ -1,0 +1,69 @@
+#include<stdio.h>
+#include<iostream.h>
+using namespace std;
+#define Length 100
+int badroad[length][4];
+long long roadmatrix[length][length];
+int badpath;
+int reachindex(int x1,int x2,int y1,int y2)
+    {
+    for(int i=0;i<badpath)
+        {
+        if((x1==badroad[i][0]&& y1==badroad[i][1]&& x2==badroad[i][2] && y2== badroad[i][3]) ||(x1==badroad[i][2]&& y1==badroad[i][3]&& x2==badroad[i][0]&& y2==badroad[i][1]))
+            return 0;
+        }
+    return 1;
+    }
+
+long long dynamicpath(int r,int s)
+    {
+    for(int i=0;i<=r;i++)
+        {
+        roadmatrix[i][0]=0;
+        if(reachindex(i,0,i-1,0)&& ((i>1&&roadmatrix[i-1][0]>0)|| i==1) )
+        {
+        roadmatrix[i][0]=1;
+        }
+        }
+    for(int i=0;i<=s;i++)
+        {
+        roadmatrix[0][i]=0;
+        if(reachindex(0,i,0,i-1)&& ((i>1&&roadmatrix[0][i-1]>0)|| i==1) )
+        {
+        roadmatrix[0][i]=1;
+        }
+        }
+
+    for(int i=1;i<=r;i++)
+        {
+        for(int j=1;j<=s;j++)
+            {
+            roadmatrix[i][j]=0;
+            if(reachindex(i,j,i-1,j))
+                {
+                roadmatrix[i][j]=roadmatrix[i][j]+roadmatrix[i-1][j];
+                }
+            if(reachindex(i,j,i,j-1))
+                {
+                roadmatrix[i][j]=roadmatrix[i][j]+roadmatrix[i][j-1];
+                }
+            }
+        }
+    return roadmatrix[r][s];
+}
+int main()
+{
+int r,s;
+while(cin>>r>>s)
+{
+                 cin>>badpath;//number of bad roads
+                 for(int i=0;i<badpath;i++)
+                 {
+                      for(int j=0;j<4;j++)
+                      {
+                      cin>>badroad[i][j];
+                      }
+                 }
+                 cout<<dynamicpath(r,s)<<endl;
+    }
+}
