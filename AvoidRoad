@@ -1,1 +1,10 @@
-
+#include<iostream.h>
+using namespace std
+int main()
+{
+int width,height;
+int bad;
+cin>>width>>height;
+cin>>bad;//number of bad paths
+int arr[bad][4];
+int possible_paths=Noofpaths(width,height,arr,bad);
